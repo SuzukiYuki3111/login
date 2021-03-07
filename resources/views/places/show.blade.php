@@ -34,13 +34,15 @@
     </table>
 
     <a href="{{ route('places.index') }}">一覧</a>
-    <a href="{{ route('places.edit', compact('place')) }}">修正</a>
-    <form action="{{ route('places.destroy', compact('place')) }}" method="post">
-        @method('delete')
-        @csrf
-        <button type="submit">削除</button>
-    </form>
 
+    @if ($place->user->id === Auth::user()->id)
+        <a href="{{ route('places.edit', compact('place')) }}">修正</a>
+        <form action="{{ route('places.destroy', compact('place')) }}" method="post">
+            @method('delete')
+            @csrf
+            <button type="submit">削除</button>
+        </form>
+    @endif
 </div>
 
 @endsection

@@ -91,6 +91,9 @@ class PlacesController extends Controller
      */
     public function update(Request $request, Place $place)
     {
+        if ($place->user_id != Auth::user()->id) {
+            abort(403);
+        }
         // 1. リクエストバリデーション
         $data = $request->validate([
         'name' => 'required|string',
@@ -121,6 +124,9 @@ class PlacesController extends Controller
      */
     public function destroy(Place $place)
     {
+        if ($place->user_id != Auth::user()->id) {
+            abort(403);
+        }
         $place->delete();
         return redirect()->to(route('places.index'));
     }
