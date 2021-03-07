@@ -17,6 +17,7 @@
 
         @auth
             <!-- ログインしている場合にはここも表示されます。 -->
+            <a href="{{ route('places.index') }}">場所一覧</a>
             名前: {{ Auth::user()->name }}
             <form action="{{ route('logout') }}" method="post">
                 @csrf
